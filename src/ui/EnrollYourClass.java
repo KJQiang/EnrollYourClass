@@ -23,8 +23,11 @@ public class EnrollYourClass {
 	static JButton submit = new JButton("Submit");
 	static JButton stop = new JButton("Stop");
 	static JLabel hint = new JLabel("检查单：是否登录超过15min，是否正处在提交页面");
+	static JLabel count = new JLabel("请求次数：");
 	static JScrollPane sp = new JScrollPane();
 	static JTextArea ta = new JTextArea();
+	
+	static Thread logic;
 	
 	public static void createWindow() {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,6 +42,7 @@ public class EnrollYourClass {
 		submit.setBounds(560, 10, 100, 50);
 		stop.setBounds(670,10,100,50);
 		hint.setBounds(50,60,700,50);
+		count.setBounds(50,100,700,50);
 		sp.setBounds(50,150,700,400);
 		ta.setBounds(50,150,700,400);
 		sp.setViewportView(ta);
@@ -51,10 +55,12 @@ public class EnrollYourClass {
 		panel.add(submit);
 		panel.add(stop);
 		panel.add(hint);
+		panel.add(count);
 		new Thread(new Runnable() {
 			public void run() {
 				while(true) {
 					ta.setText(Text.res);
+					count.setText("请求次数："+Text.count);
 					panel.updateUI();
 					try {
 						Thread.currentThread();
@@ -69,18 +75,20 @@ public class EnrollYourClass {
 			}
 		});
 		stop.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				logic.stop();
 			}
 		});
 	}
 	
 	public static void submit(String auth,String call,String lec,String dis,String host) {
-		new Thread(new Runnable() {
+		logic = new Thread(new Runnable() {
 			public void run() {
 				Doit doit = new Doit(auth,call,lec,dis,host);
 			}
-		}).start();
+		});
+		logic.start();
 	}
 	
 	public static void main(String[] args) {

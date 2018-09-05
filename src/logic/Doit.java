@@ -91,6 +91,7 @@ class MyThread extends Thread{
 		params.put("varUnits", "");
 		params.put("authCode", "");
 		params.put("courseCode", lec);
+		Text.count = Text.count + 1;
 		res = new HttpRequest().doPost(url, headers, params, false);
 		res = res + "\n" + params.get("courseCode") + "\n";
 		Document doc = Jsoup.parse(res);
@@ -138,6 +139,7 @@ class MyThread1 extends Thread{
 		params.put("varUnits", "");
 		params.put("authCode", "");
 		params.put("courseCode", dis);
+		Text.count = Text.count + 1;
 		res = new HttpRequest().doPost(url, headers, params, false);
 		res = res + "\n" + params.get("courseCode") + "\n";
 		Document doc = Jsoup.parse(res);
@@ -186,6 +188,7 @@ class MyThread2 extends Thread{
 		params.put("varUnits", "");
 		params.put("authCode", "");
 		params.put("courseCode", lec);
+		Text.count = Text.count + 1;
 		res = new HttpRequest().doPost(url, headers, params, false);
 		res = res + "\n" + params.get("courseCode") + "\n";
 		Document doc = Jsoup.parse(res);
@@ -234,6 +237,7 @@ class MyThread3 extends Thread{
 		params.put("varUnits", "");
 		params.put("authCode", "");
 		params.put("courseCode", dis);
+		Text.count = Text.count + 1;
 		res = new HttpRequest().doPost(url, headers, params, false);
 		res = res + "\n" + params.get("courseCode") + "\n";
 		Document doc = Jsoup.parse(res);
